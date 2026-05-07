@@ -1,0 +1,165 @@
+# CelebA Generative Model Comparison App
+# Central configuration file
+
+project:
+  name: "celeba-generative-comparison"
+  seed: 42
+  mode: "development"
+
+
+# Dataset settings
+data:
+  dataset_name: "CelebA"
+
+  # Local-only raw dataset path
+  raw_dir: "data/raw/celeba"
+
+  # Expected image folder inside raw_dir
+  image_dir: "data/raw/celeba/img_align_celeba"
+
+  # CelebA metadata files
+  attr_file: "data/raw/celeba/list_attr_celeba.txt"
+  bbox_file: "data/raw/celeba/list_bbox_celeba.txt"
+  partition_file: "data/raw/celeba/list_eval_partition.txt"
+  landmarks_file: "data/raw/celeba/list_landmarks_align_celeba.txt"
+
+  # Local-only processed dataset path
+  processed_dir: "data/processed/celeba_64"
+
+  # Small public sample outputs
+  sample_dir: "data/samples"
+
+  # Image preprocessing
+  image_size: 64
+  channels: 3
+  normalize_mean: [0.5, 0.5, 0.5]
+  normalize_std: [0.5, 0.5, 0.5]
+
+  # DataLoader settings
+  batch_size: 128
+  num_workers: 4
+  pin_memory: true
+
+
+# Train / validation / test split settings
+# CelebA partition file usually uses:
+# 0 = train, 1 = validation, 2 = test
+splits:
+  train_id: 0
+  val_id: 1
+  test_id: 2
+
+
+# Shared training settings
+training:
+  device: "cuda"
+  epochs: 20
+  learning_rate: 0.0002
+  weight_decay: 0.0
+  save_every: 5
+  log_every: 100
+
+  checkpoint_dir: "checkpoints"
+  runs_dir: "runs"
+  output_dir: "outputs"
+
+
+# VAE settings
+vae:
+  latent_dim: 128
+  hidden_dims: [32, 64, 128, 256]
+  beta: 1.0
+  learning_rate: 0.0002
+  epochs: 20
+  checkpoint_path: "checkpoints/vae/vae_final.pth"
+
+  outputs:
+    reconstructions_dir: "outputs/reconstructions/vae"
+    generated_dir: "outputs/generated_samples/vae"
+    latent_interpolation_dir: "outputs/latent_interpolations/vae"
+
+
+# DCGAN settings
+dcgan:
+  noise_dim: 100
+  generator_features: 64
+  discriminator_features: 64
+  learning_rate: 0.0002
+  beta1: 0.5
+  beta2: 0.999
+  epochs: 30
+  checkpoint_path: "checkpoints/dcgan/dcgan_final.pth"
+
+  outputs:
+    generated_dir: "outputs/generated_samples/dcgan"
+    fixed_noise_dir: "outputs/generated_samples/dcgan/fixed_noise_progression"
+
+
+# Diffusion model settings
+diffusion:
+  image_size: 64
+  timesteps: 1000
+  inference_steps: 50
+  learning_rate: 0.0001
+  epochs: 30
+  batch_size: 64
+
+  # Small U-Net starting setup
+  block_out_channels: [64, 128, 256, 512]
+  layers_per_block: 2
+
+  checkpoint_path: "checkpoints/diffusion/diffusion_final.pth"
+
+  outputs:
+    generated_dir: "outputs/generated_samples/diffusion"
+    denoising_progress_dir: "outputs/generated_samples/diffusion/denoising_progress"
+
+
+# Evaluation settings
+evaluation:
+  num_generated_images: 1000
+  batch_size: 64
+
+  metrics_dir: "outputs/metrics"
+  nearest_neighbors_dir: "outputs/nearest_neighbors"
+
+  fid:
+    enabled: true
+    num_real_images: 1000
+    num_fake_images: 1000
+
+  nearest_neighbors:
+    enabled: true
+    num_queries: 10
+    num_neighbors: 5
+
+
+# Report / public result figure paths
+reports:
+  figures_dir: "reports/figures"
+
+  real_samples_grid: "reports/figures/real_samples_grid.png"
+  vae_samples_grid: "reports/figures/vae_samples_grid.png"
+  dcgan_samples_grid: "reports/figures/dcgan_samples_grid.png"
+  diffusion_samples_grid: "reports/figures/diffusion_samples_grid.png"
+  model_comparison_grid: "reports/figures/model_comparison_grid.png"
+  nearest_neighbor_examples: "reports/figures/nearest_neighbour_examples.png"
+
+
+# Streamlit app settings
+app:
+  title: "CelebA Generative Model Comparison"
+  default_mode: "lightweight_demo"
+
+  modes:
+    lightweight_demo: true
+    local_inference: true
+
+  assets_dir: "app/assets"
+
+  demo_outputs:
+    comparison_grid: "reports/figures/model_comparison_grid.png"
+    real_samples_grid: "reports/figures/real_samples_grid.png"
+    vae_samples_grid: "reports/figures/vae_samples_grid.png"
+    dcgan_samples_grid: "reports/figures/dcgan_samples_grid.png"
+    diffusion_samples_grid: "reports/figures/diffusion_samples_grid.png"
