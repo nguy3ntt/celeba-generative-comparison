@@ -1,0 +1,77 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+
+# Raw and processed datasets
+data/raw/*
+data/interim/*
+data/processed/*
+
+# Keep folder placeholders
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+
+# Keep dataset instruction file
+!data/README.md
+
+
+# Model checkpoints
+checkpoints/*
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Keep checkpoint folder placeholder
+!checkpoints/.gitkeep
+
+
+# Training logs
+runs/*
+wandb/
+logs/
+lightning_logs/
+
+# Keep run folder placeholders
+!runs/vae/.gitkeep
+!runs/dcgan/.gitkeep
+!runs/diffusion/.gitkeep
+
+# Large outputs
+outputs/generated_samples/*
+outputs/reconstructions/*
+outputs/latent_interpolations/*
+outputs/nearest_neighbors/*
+outputs/metrics/*
+
+# Keep output folder placeholders
+!outputs/generated_samples/.gitkeep
+!outputs/reconstructions/.gitkeep
+!outputs/latent_interpolations/.gitkeep
+!outputs/nearest_neighbors/.gitkeep
+!outputs/metrics/.gitkeep
+
+# Keep selected public report figures
+# Reports are allowed because they will contain small final figures
+# such as sample grids and comparison plots.
+!reports/
+!reports/figures/
+!reports/figures/.gitkeep
+!reports/results_summary.md
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
