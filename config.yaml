@@ -18,10 +18,10 @@ data:
   image_dir: "data/raw/celeba/img_align_celeba"
 
   # CelebA metadata files
-  attr_file: "data/raw/celeba/list_attr_celeba.txt"
-  bbox_file: "data/raw/celeba/list_bbox_celeba.txt"
-  partition_file: "data/raw/celeba/list_eval_partition.txt"
-  landmarks_file: "data/raw/celeba/list_landmarks_align_celeba.txt"
+  attr_file: "data/raw/celeba/list_attr_celeba.csv"
+  bbox_file: "data/raw/celeba/list_bbox_celeba.csv"
+  partition_file: "data/raw/celeba/list_eval_partition.csv"
+  landmarks_file: "data/raw/celeba/list_landmarks_align_celeba.csv"
 
   # Local-only processed dataset path
   processed_dir: "data/processed/celeba_64"
