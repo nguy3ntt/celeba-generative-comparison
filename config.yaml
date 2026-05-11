@@ -37,8 +37,8 @@ data:
 
   # DataLoader settings
   batch_size: 128
-  num_workers: 4
-  pin_memory: true
+  num_workers: 0
+  pin_memory: false
 
 
 # Train / validation / test split settings
@@ -84,10 +84,20 @@ dcgan:
   noise_dim: 100
   generator_features: 64
   discriminator_features: 64
-  learning_rate: 0.0002
+
+  generator_learning_rate: 0.0002
+  discriminator_learning_rate: 0.0001
+
   beta1: 0.5
   beta2: 0.999
   epochs: 30
+
+  real_label_smooth: 0.9
+  fake_label: 0.0
+
+  instance_noise_start: 0.05
+  instance_noise_end: 0.0
+
   checkpoint_path: "checkpoints/dcgan/dcgan_final.pth"
 
   outputs:
@@ -102,10 +112,10 @@ diffusion:
   inference_steps: 50
   learning_rate: 0.0001
   epochs: 30
-  batch_size: 64
+  batch_size: 32
 
   # Small U-Net starting setup
-  block_out_channels: [64, 128, 256, 512]
+  block_out_channels: [64, 128, 256, 256]
   layers_per_block: 2
 
   checkpoint_path: "checkpoints/diffusion/diffusion_final.pth"
