@@ -1,0 +1,4 @@
+model,epochs,final_train_loss,final_val_loss,training_behaviour,visual_quality,main_strength,main_limitation
+VAE,30,460.9962942975122,461.9398997380183,Stable,Low-Medium,Stable latent-space baseline,Blurry generated outputs
+Tuned DCGAN,30,3.269669249384165,,Adversarial and less stable,Medium-High,Sharper and more textured samples than VAE,GAN artifacts and late training instability
+Diffusion,30,0.018377730222873,,Stable,High,Best visual quality and diversity,Slower sampling and heavier training
