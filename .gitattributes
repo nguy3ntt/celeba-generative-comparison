@@ -1,2 +1,14 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+notebooks/*.ipynb linguist-documentation
+reports/figures/* linguist-generated
+reports/tables/* linguist-generated
+
+*.png linguist-generated
+*.jpg linguist-generated
+*.jpeg linguist-generated
+*.csv linguist-generated
+
+src/**/*.py linguist-detectable
+scripts/**/*.py linguist-detectable
+app/**/*.py linguist-detectable
